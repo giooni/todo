@@ -7,7 +7,8 @@ const ul = document.getElementById("events");
 
 const list = JSON.parse(localStorage.getItem("todo")) || [];
 
-window.onload= () =>{
+window.onload = () => {
+    
     list.forEach(el => addevent(el))
 }
 
@@ -21,23 +22,22 @@ function toDoItem(description, id, isCompleted){
 
 function addevent(addli =""){
     const li = document.createElement("li");
-    let id =addli? addli.id : Date.now();
-    let description = addli? addli.description: inp.value;
-    li.innerText = description;
+    let id =addli ? addli.id : Date.now();
+    let name = addli ? addli.description : inp.value;
+    li.innerText = name;
     li.setAttribute("id", id )
     ul.appendChild(li);
     li.addEventListener("click", doneitem)
-    if(!addli){
-        const todoitem = new toDoItem(description, ''+id, false);
+    if(! addli){
+        const todoitem = new toDoItem(name,  ''+id, false);
         list.push(todoitem)
     }
-
 }
 function doneitem(e){
     const clickeditem = e.target;
     clickeditem.classList.add("done");
     const foundedel = list.find((el) => el.id ===clickeditem.id);
-    foundedel.isCompleted = true;
+    foundedel.isCompleted === true;
     
     
 
@@ -59,7 +59,7 @@ function clearAll(){
         ul.innerHTML = " ";
         list.length = 0;
         console.log(list)
-        localStorage.removeItem("list")
+        localStorage.removeItem("todo")
 
     })
 }
@@ -70,6 +70,7 @@ function clearDone(){
         
     })
 }
+
 clearDone();
 clearAll();
 check();
@@ -77,4 +78,8 @@ check();
 save.addEventListener("click", ()=>{
     localStorage.setItem("todo", JSON.stringify(list))
 })
+
+
+
+
 
